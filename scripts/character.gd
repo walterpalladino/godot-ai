@@ -50,7 +50,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if(navigation_agent.is_navigation_finished()):
+	if(navigation_agent.is_navigation_finished() || !navigation_agent.is_target_reachable()):
 		velocity = Vector3.ZERO
 	else:
 		move_to_point(delta, Speed)
@@ -102,13 +102,11 @@ func get_world_position():
 		
 	var result = space.intersect_ray(ray_query)
 	
-	#print(result)
-	#print(result.collider.name)
-	
 	if result:
 		return result.position
 	else:
 		return null
+
 
 # Update animations
 func update_animations():
