@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends StaticBody3D
 
 const RAY_LENGTH = 1000
 const LEFT_MOUSE_BUTTON = 1
@@ -55,43 +55,69 @@ var current_path_index: int = 0
 var current_path_point: Vector3
 var current_path: PackedVector3Array
 
+#
+var velocity : Vector3 = Vector3.ZERO
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#motion_mode = MOTION_MODE_GROUNDED
 
-	print_debug("_ready")
-	print_debug(get_tree().current_scene.name)
+	#print_debug("_ready")
+	#print_debug(get_tree().current_scene.name)
 	#print_debug( get_tree().get_root().get_node(get_tree().current_scene.name + "Camera3D") )
 
 	#pass # Replace with function body.
+	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
+	# Wait for NavigationServer sync to adapt to made changes.
+	#await get_tree().physics_frame
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
-	if(navigation_agent.is_navigation_finished() || !navigation_agent.is_target_reachable()):
-		velocity = Vector3.ZERO
-	else:
-		move_to_point(delta, walking_speed)
+		
+	move_to_point(delta, walking_speed)
 
 	update_animations()
 		
 
-func move_to_point(delta, speed):
+func move_to_point(delta, movement_speed):
 
-	var target_pos = navigation_agent.get_next_path_position()
-	var direction = global_position.direction_to(target_pos)
-	
-	face_to(target_pos)
-	
-	var new_velocity = direction * speed
-	velocity = velocity.move_toward(new_velocity, delta * 2.5)
-	
-	move_and_slide()
-	
+	# Do not query when the map has never synchronized and is empty.
+	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:
+		velocity = Vector3.ZERO
+		navigation_agent.target_position = global_position
+		return
+	if navigation_agent.is_navigation_finished():
+		velocity = Vector3.ZERO
+		navigation_agent.target_position = global_position
+		return
+		
+	if !navigation_agent.is_target_reachable():
+		velocity = Vector3.ZERO
+		navigation_agent.target_position = global_position
+		return
 
+
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	####var direction = global_position.direction_to(target_pos)
+	
+	face_to(next_path_position)
+	
+	#var new_velocity = direction * speed
+	#velocity = velocity.move_toward(new_velocity, delta * 2.5)
+	
+#	move(delta)
+	movement_delta = movement_speed * delta
+	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * movement_delta
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
+
+	
+	
 func face_to(target_pos):
 
 	#	Hard Turn
@@ -111,13 +137,24 @@ func _input(event):
 		if target_position:
 			navigation_agent.target_position = target_position
 			
-			var new_path = get_navigation_path(target_position, global_position)
-			if new_path:
-				print("--------------------")
-				print("New Path Calculated:")
-				for p in new_path:
-					print(p) # Print each point in the calculated path
-				print("--------------------")
+			#if (navigation_agent.get_current_navigation_path()):
+				#print("--------------------")
+				#print("get_current_navigation_path:")
+				#for p in navigation_agent.get_current_navigation_path():
+					#print(p) # Print each point in the calculated path
+				#print("--------------------")
+
+
+				
+			#set_movement_target(target_position)
+			
+			#var new_path = get_navigation_path(target_position, global_position)
+			#if new_path:
+				#print("--------------------")
+				#print("New Path Calculated:")
+				#for p in new_path:
+					#print(p) # Print each point in the calculated path
+				#print("--------------------")
 		
 		
 		
@@ -195,3 +232,9 @@ func set_movement_target(target_position: Vector3):
 		current_path_index = 0
 		current_path_point = current_path[0]
 		
+#	Callbacks
+func _on_velocity_computed(safe_velocity: Vector3):
+	#print("_on_velocity_computed : ", safe_velocity)
+	velocity = safe_velocity
+	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
+	

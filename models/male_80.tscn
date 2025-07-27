@@ -78,6 +78,5 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_swct5")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/conditions/idle = false
 parameters/conditions/walking = false
