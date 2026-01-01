@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="godot-ai"
-run/main_scene="res://scenes/navigation_001.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+run/main_scene="res://assets/ai/scenes/navigation_001.tscn"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"

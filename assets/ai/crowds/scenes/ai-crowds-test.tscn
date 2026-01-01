@@ -1,0 +1,286 @@
+[gd_scene load_steps=16 format=3 uid="uid://dpduibt8d5qku"]
+
+[ext_resource type="Material" uid="uid://da1ihjgcltaq7" path="res://assets/ai/crowds/materials/street.tres" id="1_alg2v"]
+[ext_resource type="Material" uid="uid://cx7t3sobkldou" path="res://assets/ai/crowds/materials/sidewalk.tres" id="2_uxh8a"]
+[ext_resource type="Material" uid="uid://0mjahke3pscs" path="res://assets/ai/crowds/materials/buildings.tres" id="3_rldbc"]
+[ext_resource type="PackedScene" uid="uid://dubwfu25o8k87" path="res://assets/ai/crowds/prefabs/nav-point-marker.tscn" id="4_0j2yc"]
+[ext_resource type="Script" uid="uid://cxlsufpvfvolc" path="res://assets/ai/crowds/script/character-crowd.gd" id="5_1fsci"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0j2yc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_1fsci"]
+sky_material = SubResource("ProceduralSkyMaterial_0j2yc")
+
+[sub_resource type="Environment" id="Environment_4ywsj"]
+background_mode = 2
+sky = SubResource("Sky_1fsci")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0j2yc"]
+vertices = PackedVector3Array(-99.5, 0.5, -68.25, -70.5, 0.5, -68.25, -70.5, 0.5, -70.25, -68.25, 0.5, -70.5, -68.25, 0.5, -99.5, -99.5, 0.5, -99.5, -41.5, 0.5, -70.5, -41.5, 0.5, -99.5, -39.5, 0.5, -70.5, -39.25, 0.5, -68.5, -15.5, 0.5, -68.5, -15.25, 0.5, -70.5, -13.25, 0.5, -99.5, -13.25, 0.5, -70.5, 13.5, 0.5, -70.5, 13.5, 0.5, -99.5, 15.5, 0.5, -70.5, 15.75, 0.5, -68.5, 39.5, 0.5, -68.5, 39.75, 0.5, -70.5, 41.75, 0.5, -99.5, 41.75, 0.5, -70.5, 68.5, 0.5, -70.5, 68.5, 0.5, -99.5, 70.5, 0.5, -70.5, 70.75, 0.5, -68.75, 99.5, 0.5, -69, 99.5, 0.5, -99.5, -69.5, 20.5, -69.5, -69.5, 20.5, -40.5, -40.5, 20.5, -40.5, -40.5, 20.5, -69.5, -14.5, 20.5, -69.5, -14.5, 20.5, -40.5, 14.5, 20.5, -40.5, 14.5, 20.5, -69.5, 40.5, 20.5, -69.5, 40.5, 20.5, -40.5, 69.5, 20.5, -40.5, 69.5, 20.5, -69.5, -69.25, 0.5, -69.25, -69.25, 0.5, -40.5, -40.5, 0.5, -40.5, -40.5, 0.5, -69.25, -14.25, 0.5, -69.25, -14.25, 0.5, -40.5, 14.5, 0.5, -40.5, 14.5, 0.5, -69.25, 40.75, 0.5, -69.25, 40.75, 0.5, -40.5, 69.5, 0.5, -40.5, 69.5, 0.5, -69.25, 70.75, 0.5, -41.25, 99.5, 0.5, -41, -39.25, 0.5, -41.5, -15.5, 0.5, -41.25, 15.75, 0.5, -41.5, 39.5, 0.5, -41.25, -99.5, 0.5, -41.5, -70.5, 0.5, -41.5, -70.5, 0.5, -15.25, -68.5, 0.5, -15.5, -68.5, 0.5, -39.25, -70.5, 0.5, -39.5, -99.5, 0.5, -13.25, -70.5, 0.5, -13.25, -18.5, 0.5, -19, -17.5, 0.5, -19, -15.5, 0.5, -39.75, -39.25, 0.5, -40, 15.75, 0.5, -40, 17.5, 0.5, -19, 18.5, 0.5, -19, 40, 0.5, -39.25, 39.5, 0.5, -39.5, 70.25, 0.5, -39.25, 68.5, 0.5, -39.25, 68.75, 0.5, -15.5, 70.5, 0.5, -15.5, 70.75, 0.5, -39.75, 70.75, 0.5, -13.75, 99.5, 0.5, -14, -39.75, 0.5, -15.5, -19, 0.5, -17.5, -19, 0.5, -18.75, -39.75, 0.5, -39.25, -41.25, 0.5, -15.5, -41.5, 0.5, -39.25, 15.25, 0.5, -15.25, 17.5, 0.5, -17, 17, 0.5, -17.25, -17, 0.5, -18.75, -17, 0.5, -17.25, -15.25, 0.5, -15.5, 17, 0.5, -18.75, 15.25, 0.5, -39.25, -15.25, 0.5, -39.25, 19, 0.5, -17.25, 18.5, 0.5, -17, 39.5, 0.5, -15, 39.75, 0.5, -15.5, 19, 0.5, -18.75, 41.5, 0.5, -15.5, 41.5, 0.5, -39.25, -17.25, 0.5, 17, -17, 0.5, 17.5, -15.25, 0.5, 15.25, -18.75, 0.5, -17, -18.75, 0.5, 17, -39.25, 0.5, 15.25, -40, 0.5, 15.75, -19, 0.5, 17.5, -39.25, 0.5, -15.25, 16.5, 0.5, 16.5, 17.25, 0.5, 17, 18.5, 0.5, 17, 15, 1, -14.5, 39.5, 0.5, 15.25, -69.5, 20.5, -14.5, -69.5, 20.5, 14.5, -40.5, 20.5, 14.5, -40.5, 20.5, -14.5, -14.5, 1, 15, -14.5, 1, -14.5, 13.97934, 1, 13.980354, 40.5, 20.5, -14.5, 40.5, 20.5, 14.5, 69.5, 20.5, 14.5, 69.5, 20.5, -14.5, -69.25, 0.5, -14.25, -69.25, 0.5, 14.5, -40.5, 0.5, 14.5, -40.5, 0.5, -14.25, 40.75, 0.5, -14.25, 40.75, 0.5, 14.5, 69.5, 0.5, 14.5, 69.5, 0.5, -14.25, 70.75, 0.5, 13.75, 99.5, 0.5, 14, -99.5, 0.5, 13.5, -70.5, 0.5, 13.5, -70.5, 0.5, 39.75, -68.5, 0.5, 39.5, -68.5, 0.5, 15.75, -70.5, 0.5, 15.5, -99.5, 0.5, 41.75, -70.5, 0.5, 41.75, 70.25, 0.5, 15.75, 68.5, 0.5, 15.75, 68.75, 0.5, 39.5, 70.5, 0.5, 39.5, 70.75, 0.5, 15.25, 70.75, 0.5, 41.25, 99.5, 0.5, 41, 17, 0.5, 18.5, -17, 0.5, 18.5, 15.25, 0.5, 39.5, -15, 0.5, 39.5, 19, 0.5, 17.5, 40, 0.5, 15.75, -41.25, 0.5, 39.5, -41.5, 0.5, 15.75, -19, 0.5, 18.5, -39.75, 0.5, 39.5, 19, 0.5, 18.5, 40, 0.5, 39.5, 41.5, 0.5, 39.5, 41.5, 0.5, 15.75, -17.25, 0.5, 19, -15.5, 0.5, 39.75, -18.75, 0.5, 19, -39.25, 0.5, 39.75, -39.25, 0.5, 41.5, -15.5, 0.5, 41.5, 15.75, 0.5, 40, 17.5, 0.5, 19, 18.75, 0.5, 19, 15.75, 0.5, 41.5, 39.5, 0.5, 39.75, 39.5, 0.5, 41.5, -69.5, 20.5, 40.5, -69.5, 20.5, 69.5, -40.5, 20.5, 69.5, -40.5, 20.5, 40.5, -14.5, 20.5, 40.5, -14.5, 20.5, 69.5, 14.5, 20.5, 69.5, 14.5, 20.5, 40.5, 40.5, 20.5, 40.5, 40.5, 20.5, 69.5, 69.5, 20.5, 69.5, 69.5, 20.5, 40.5, -69.25, 0.5, 40.75, -69.25, 0.5, 69.5, -40.5, 0.5, 69.5, -40.5, 0.5, 40.75, -14.25, 0.5, 40.75, -14.25, 0.5, 69.5, 14.5, 0.5, 69.5, 14.5, 0.5, 40.75, 40.75, 0.5, 40.75, 40.75, 0.5, 69.5, 69.5, 0.5, 69.5, 69.5, 0.5, 40.75, 70.75, 0.5, 68.75, 99.5, 0.5, 69, -39.25, 0.5, 68.5, -15.5, 0.5, 68.75, 15.75, 0.5, 68.5, 39.5, 0.5, 68.75, -99.5, 0.5, 68.5, -70.5, 0.5, 68.5, -69, 0.5, 99.5, -68.75, 0.5, 70.75, -70.5, 0.5, 70.5, -99.5, 0.5, 99.5, -39.25, 0.5, 70.25, -15.5, 0.5, 70.5, -39.75, 0.5, 70.75, -41.25, 0.5, 70.75, -41, 0.5, 99.5, -14, 0.5, 99.5, -13.75, 0.5, 70.75, 15.75, 0.5, 70.25, 39.5, 0.5, 70.5, 15.25, 0.5, 70.75, 13.75, 0.5, 70.75, 14, 0.5, 99.5, 41, 0.5, 99.5, 41.25, 0.5, 70.75, 70.75, 0.5, 70.25, 70.25, 0.5, 70.75, 68.75, 0.5, 70.75, 69, 0.5, 99.5, 99.5, 0.5, 99.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(4, 7, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(11, 7, 12), PackedInt32Array(8, 6, 7), PackedInt32Array(12, 13, 11), PackedInt32Array(12, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 15), PackedInt32Array(19, 15, 20), PackedInt32Array(16, 14, 15), PackedInt32Array(20, 21, 19), PackedInt32Array(20, 23, 21), PackedInt32Array(21, 23, 22), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(27, 24, 23), PackedInt32Array(24, 22, 23), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 30, 29), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(47, 46, 44), PackedInt32Array(44, 46, 45), PackedInt32Array(51, 50, 48), PackedInt32Array(48, 50, 49), PackedInt32Array(25, 26, 52), PackedInt32Array(52, 26, 53), PackedInt32Array(9, 10, 54), PackedInt32Array(54, 10, 55), PackedInt32Array(17, 18, 56), PackedInt32Array(56, 18, 57), PackedInt32Array(0, 1, 58), PackedInt32Array(58, 1, 59), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63), PackedInt32Array(63, 60, 64), PackedInt32Array(63, 64, 58), PackedInt32Array(58, 59, 63), PackedInt32Array(60, 65, 64), PackedInt32Array(67, 66, 68), PackedInt32Array(68, 66, 55), PackedInt32Array(55, 66, 69), PackedInt32Array(55, 69, 54), PackedInt32Array(71, 70, 72), PackedInt32Array(72, 70, 56), PackedInt32Array(72, 56, 74), PackedInt32Array(72, 74, 73), PackedInt32Array(56, 57, 74), PackedInt32Array(78, 77, 75), PackedInt32Array(75, 77, 76), PackedInt32Array(79, 52, 53), PackedInt32Array(75, 79, 78), PackedInt32Array(78, 79, 80), PackedInt32Array(80, 79, 81), PackedInt32Array(81, 79, 53), PackedInt32Array(84, 83, 82), PackedInt32Array(84, 82, 66), PackedInt32Array(66, 82, 86), PackedInt32Array(66, 86, 85), PackedInt32Array(66, 85, 69), PackedInt32Array(86, 87, 85), PackedInt32Array(90, 89, 88), PackedInt32Array(93, 92, 91), PackedInt32Array(94, 90, 88), PackedInt32Array(94, 95, 71), PackedInt32Array(71, 95, 70), PackedInt32Array(91, 67, 96), PackedInt32Array(96, 67, 68), PackedInt32Array(91, 96, 93), PackedInt32Array(93, 96, 95), PackedInt32Array(93, 95, 94), PackedInt32Array(93, 94, 88), PackedInt32Array(62, 87, 61), PackedInt32Array(61, 87, 86), PackedInt32Array(99, 98, 97), PackedInt32Array(99, 97, 100), PackedInt32Array(100, 97, 101), PackedInt32Array(101, 72, 100), PackedInt32Array(100, 72, 102), PackedInt32Array(102, 72, 73), PackedInt32Array(102, 73, 103), PackedInt32Array(103, 76, 102), PackedInt32Array(102, 76, 77), PackedInt32Array(104, 106, 105), PackedInt32Array(107, 92, 93), PackedInt32Array(106, 104, 108), PackedInt32Array(108, 111, 109), PackedInt32Array(109, 111, 110), PackedInt32Array(107, 112, 83), PackedInt32Array(83, 112, 82), PackedInt32Array(107, 93, 112), PackedInt32Array(112, 93, 109), PackedInt32Array(109, 93, 108), PackedInt32Array(108, 93, 106), PackedInt32Array(114, 113, 115), PackedInt32Array(88, 89, 116), PackedInt32Array(116, 89, 98), PackedInt32Array(115, 113, 117), PackedInt32Array(117, 113, 99), PackedInt32Array(99, 113, 98), PackedInt32Array(98, 113, 116), PackedInt32Array(121, 120, 118), PackedInt32Array(118, 120, 119), PackedInt32Array(116, 124, 123), PackedInt32Array(123, 124, 122), PackedInt32Array(122, 124, 113), PackedInt32Array(113, 124, 116), PackedInt32Array(128, 127, 125), PackedInt32Array(125, 127, 126), PackedInt32Array(132, 131, 129), PackedInt32Array(129, 131, 130), PackedInt32Array(136, 135, 133), PackedInt32Array(133, 135, 134), PackedInt32Array(80, 81, 137), PackedInt32Array(137, 81, 138), PackedInt32Array(64, 65, 139), PackedInt32Array(139, 65, 140), PackedInt32Array(142, 141, 143), PackedInt32Array(143, 141, 144), PackedInt32Array(144, 141, 145), PackedInt32Array(144, 145, 139), PackedInt32Array(139, 140, 144), PackedInt32Array(141, 146, 145), PackedInt32Array(150, 149, 147), PackedInt32Array(147, 149, 148), PackedInt32Array(151, 137, 138), PackedInt32Array(147, 151, 150), PackedInt32Array(150, 151, 152), PackedInt32Array(152, 151, 153), PackedInt32Array(153, 151, 138), PackedInt32Array(113, 114, 154), PackedInt32Array(106, 122, 105), PackedInt32Array(105, 122, 155), PackedInt32Array(154, 156, 113), PackedInt32Array(113, 156, 157), PackedInt32Array(113, 157, 155), PackedInt32Array(113, 155, 122), PackedInt32Array(115, 117, 158), PackedInt32Array(158, 117, 159), PackedInt32Array(143, 161, 142), PackedInt32Array(142, 161, 160), PackedInt32Array(111, 162, 110), PackedInt32Array(110, 162, 161), PackedInt32Array(161, 162, 163), PackedInt32Array(161, 163, 160), PackedInt32Array(158, 159, 164), PackedInt32Array(164, 159, 167), PackedInt32Array(164, 167, 165), PackedInt32Array(165, 167, 166), PackedInt32Array(167, 148, 166), PackedInt32Array(166, 148, 149), PackedInt32Array(168, 155, 157), PackedInt32Array(157, 169, 168), PackedInt32Array(168, 169, 170), PackedInt32Array(173, 172, 171), PackedInt32Array(170, 169, 162), PackedInt32Array(162, 169, 173), PackedInt32Array(162, 173, 171), PackedInt32Array(162, 171, 163), PackedInt32Array(154, 175, 156), PackedInt32Array(156, 175, 174), PackedInt32Array(174, 175, 176), PackedInt32Array(176, 164, 174), PackedInt32Array(174, 164, 177), PackedInt32Array(177, 164, 178), PackedInt32Array(178, 164, 165), PackedInt32Array(178, 179, 177), PackedInt32Array(183, 182, 180), PackedInt32Array(180, 182, 181), PackedInt32Array(187, 186, 184), PackedInt32Array(184, 186, 185), PackedInt32Array(191, 190, 188), PackedInt32Array(188, 190, 189), PackedInt32Array(195, 194, 192), PackedInt32Array(192, 194, 193), PackedInt32Array(199, 198, 196), PackedInt32Array(196, 198, 197), PackedInt32Array(203, 202, 200), PackedInt32Array(200, 202, 201), PackedInt32Array(152, 153, 204), PackedInt32Array(204, 153, 205), PackedInt32Array(172, 173, 206), PackedInt32Array(206, 173, 207), PackedInt32Array(177, 179, 208), PackedInt32Array(208, 179, 209), PackedInt32Array(145, 146, 210), PackedInt32Array(210, 146, 211), PackedInt32Array(213, 212, 214), PackedInt32Array(214, 212, 215), PackedInt32Array(214, 215, 210), PackedInt32Array(210, 211, 214), PackedInt32Array(217, 216, 207), PackedInt32Array(207, 216, 206), PackedInt32Array(220, 219, 218), PackedInt32Array(216, 217, 218), PackedInt32Array(218, 217, 222), PackedInt32Array(218, 222, 221), PackedInt32Array(218, 221, 220), PackedInt32Array(224, 223, 209), PackedInt32Array(209, 223, 208), PackedInt32Array(227, 226, 225), PackedInt32Array(223, 224, 225), PackedInt32Array(225, 224, 229), PackedInt32Array(225, 229, 228), PackedInt32Array(225, 228, 227), PackedInt32Array(230, 204, 205), PackedInt32Array(233, 232, 231), PackedInt32Array(230, 205, 231), PackedInt32Array(231, 205, 234), PackedInt32Array(231, 234, 233), PackedInt32Array(213, 219, 212), PackedInt32Array(212, 219, 220), PackedInt32Array(222, 226, 221), PackedInt32Array(221, 226, 227), PackedInt32Array(229, 232, 228), PackedInt32Array(228, 232, 233)]
+
+[sub_resource type="QuadMesh" id="QuadMesh_uxh8a"]
+size = Vector2(200, 200)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1fsci"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rldbc"]
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uxh8a"]
+material = ExtResource("3_rldbc")
+size = Vector3(30, 20, 30)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0j2yc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1fsci"]
+
+[node name="AiCrowdsTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4ywsj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_0j2yc")
+
+[node name="Env" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="streets" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+mesh = SubResource("QuadMesh_uxh8a")
+surface_material_override/0 = ExtResource("1_alg2v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Env/streets"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Env/streets/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
+shape = SubResource("BoxShape3D_1fsci")
+
+[node name="sidewalk" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.6, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk2" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block2" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk2" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk2" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk2" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk2" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk5" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 0.1, 0)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block3" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk5" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk5" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk5" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk5" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk6" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 0.1, -55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block4" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk6" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk6" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk6" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk6" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk3" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0.1, 0)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block5" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk3" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk3" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk3" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk3" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk7" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block6" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk7" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk7" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk7" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk7" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk8" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 0.1, 55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block7" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk8" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk8" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk8" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk8" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk9" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0.1, 55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block8" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk9" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk9" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk9" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk9" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="sidewalk4" type="MeshInstance3D" parent="NavigationRegion3D/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0.1, -55)
+mesh = SubResource("BoxMesh_rldbc")
+surface_material_override/0 = ExtResource("2_uxh8a")
+
+[node name="building-block9" type="MeshInstance3D" parent="NavigationRegion3D/Env/sidewalk4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_uxh8a")
+skeleton = NodePath("../..")
+
+[node name="NavPointMarker" parent="NavigationRegion3D/Env/sidewalk4" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.2, 18)
+
+[node name="NavPointMarker2" parent="NavigationRegion3D/Env/sidewalk4" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.2, 18)
+
+[node name="NavPointMarker3" parent="NavigationRegion3D/Env/sidewalk4" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.20000002, -18)
+
+[node name="NavPointMarker4" parent="NavigationRegion3D/Env/sidewalk4" instance=ExtResource("4_0j2yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.20000002, -18)
+
+[node name="CharacterCrowd" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.284, 0.5, 11.250008)
+script = ExtResource("5_1fsci")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterCrowd"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterCrowd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0j2yc")
+
+[node name="Model" type="Node3D" parent="CharacterCrowd"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterCrowd/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_1fsci")
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(0.6512654, 0.38362464, -0.6547408, -0.5075384, 0.8616291, 0, 0.5641438, 0.3323061, 0.7558535, -24.339, 11.296, -24.98)
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder"]
+transform = Transform3D(-0.0045204447, 0, -0.9999898, 0, 1, 0, 0.9999898, 0, -0.0045204447, 0, 0, 0)

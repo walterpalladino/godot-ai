@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgmuwgb0rxuvn"]
+
+[ext_resource type="Script" uid="uid://dgawe2wsfke71" path="res://assets/ai/haiku/scripts/conversational-haiku.gd" id="1_f1oxx"]
+
+[node name="ConversationalHaikuTest" type="Node2D"]
+script = ExtResource("1_f1oxx")

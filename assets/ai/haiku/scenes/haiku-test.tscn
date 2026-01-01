@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr2ferpolj63q"]
+
+[ext_resource type="Script" uid="uid://dv24p18if6cdv" path="res://assets/ai/haiku/scripts/haiku-generator.gd" id="1_2ofps"]
+
+[node name="HaikuTest" type="Node2D"]
+script = ExtResource("1_2ofps")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqmfinhn870rt"]
+
+[ext_resource type="Script" uid="uid://b1gumy58v1fsr" path="res://assets/ai/scripts/camera_orbit.gd" id="1_0ef76"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19646, 6.00424)
+script = ExtResource("1_0ef76")
+orbit_speed = 10.0
+orbit_radius = 5.0
+orbit_height = 2.0
