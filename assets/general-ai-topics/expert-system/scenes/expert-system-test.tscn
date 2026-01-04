@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n2a7ocfa8tir"]
+
+[ext_resource type="Script" uid="uid://dgmtrijfyhms6" path="res://assets/general-ai-topics/expert-system/scripts/expert-system.gd" id="1_sh2uv"]
+
+[node name="ExpertSystemTest" type="Node"]
+script = ExtResource("1_sh2uv")
