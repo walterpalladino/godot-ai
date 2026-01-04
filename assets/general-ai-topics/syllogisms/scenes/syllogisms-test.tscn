@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dswt24cvt8ekk"]
+
+[ext_resource type="Script" uid="uid://c8x26x0pwyf0k" path="res://assets/general-ai-topics/syllogisms/scripts/syllogisms.gd" id="1_82204"]
+
+[node name="SyllogismsTest" type="Node2D"]
+script = ExtResource("1_82204")

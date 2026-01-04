@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vkiadcxgaofq"]
-
-[ext_resource type="Script" uid="uid://3uiugv7qmfb4" path="res://assets/ai/pathfinding-algorithms/scripts/pathfinding-graph.gd" id="1_54w6j"]
-
-[node name="GraphTest" type="Node2D"]
-script = ExtResource("1_54w6j")

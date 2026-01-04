@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://gnmlxxrlgclu"]
+
+[ext_resource type="Script" uid="uid://6twcxbvlqd83" path="res://assets/general-ai-topics/markov-model/scripts/markov-model.gd" id="1_kmlv7"]
+
+[node name="MarkovModelTest" type="Node2D"]
+script = ExtResource("1_kmlv7")
+model_path = "res://assets/ai/markov-model/data"

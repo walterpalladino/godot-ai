@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://quvuuahutx2e"]
+
+[ext_resource type="Script" uid="uid://17ryicxfy753" path="res://assets/general-ai-topics/pathfinding-algorithms/scripts/pathfinding-hexa.gd" id="1_gaa3g"]
+
+[node name="PathfindingHexaTest" type="Node"]
+script = ExtResource("1_gaa3g")

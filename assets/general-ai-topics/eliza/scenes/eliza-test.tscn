@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgesaccu6jef5"]
+
+[ext_resource type="Script" uid="uid://2c2t8xpjt4fs" path="res://assets/general-ai-topics/eliza/scripts/eliza-conversation.gd" id="1_fgrlq"]
+
+[node name="ElizaTest" type="Node2D"]
+script = ExtResource("1_fgrlq")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj4t2vr7gvxw2"]
-
-[ext_resource type="Script" uid="uid://cn8fpg7v7e52n" path="res://assets/ai/pathfinding-algorithms/scripts/pathfinding-graph-grid.gd" id="1_c3q6i"]
-
-[node name="DijkstraSAlgorithmTest" type="Node2D"]
-script = ExtResource("1_c3q6i")
