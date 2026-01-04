@@ -1,4 +1,5 @@
-Based on Claude code and fexed / modified
+## Eliza
+Functional ELIZA-style chatbot in GDScript that captures the essence of the classic 1960s conversational AI!
 
 **Key Features:**
 
