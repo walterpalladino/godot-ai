@@ -31,4 +31,7 @@ Several implementations of pathfinding algorithms including:
 - Graph Based
 - Grid Based
 - Hexagon Based
- 
+
+## Expert System
+
+Allows to create a databse which will be query for the best match. 
