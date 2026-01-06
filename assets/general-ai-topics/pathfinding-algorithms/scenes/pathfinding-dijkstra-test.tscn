@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lj1uqwcvhye6"]
+
+[ext_resource type="Script" uid="uid://8r7eitjoi852" path="res://assets/general-ai-topics/pathfinding-algorithms/scripts/Dijkstra/dijkstra-tests.gd" id="1_4p5bm"]
+
+[node name="PathfindingDijkstra" type="Node"]
+script = ExtResource("1_4p5bm")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy6rpxc7qb01m"]
+
+[ext_resource type="Script" uid="uid://cntclqv60uykx" path="res://assets/general-ai-topics/pathfinding-algorithms/scripts/pathfinding-astar.gd" id="1_w20cy"]
+
+[node name="PathfindingAStar" type="Node"]
+script = ExtResource("1_w20cy")
