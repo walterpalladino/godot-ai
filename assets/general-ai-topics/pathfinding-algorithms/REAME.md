@@ -7,12 +7,6 @@ A* search is an extension of Dijkstra's algorithm that uses a  **heuristic funct
 
 ## Key Differences
 
-
-| sas | sas | sasa |
-|--|--|--|
-|  |  |  |
-
-
 | Feature | Dijkstra's Algorithm | AStar Algorithm | 
 |--|--|--|
 | **Search Strategy** | Uninformed search; explores outward in a breadth-first manner based purely on accumulated path cost (g(n)). |Informed search; uses a heuristic (h(n)) to estimate the distance to the goal, guiding the search. |
