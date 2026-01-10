@@ -35,3 +35,10 @@ Several implementations of pathfinding algorithms including:
 ## Expert System
 
 Allows to create a databse which will be query for the best match. 
+
+
+## Games
+
+Some text adventures recreated:
+
+- Radio Shack Haunted House
