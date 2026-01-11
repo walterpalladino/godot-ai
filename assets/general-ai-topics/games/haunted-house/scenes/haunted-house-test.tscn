@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://g3wrt55go787"]
 
-[ext_resource type="Script" uid="uid://d1s8fgk5rjplw" path="res://assets/general-ai-topics/haunted-house/scripts/haunted-house.gd" id="1_irrlu"]
+[ext_resource type="Script" uid="uid://d1s8fgk5rjplw" path="res://assets/general-ai-topics/games/haunted-house/scripts/haunted-house.gd" id="1_irrlu"]
 
 [node name="HauntedHouseTest" type="Control"]
 layout_mode = 3
