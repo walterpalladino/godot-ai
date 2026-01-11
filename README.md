@@ -42,3 +42,4 @@ Allows to create a databse which will be query for the best match.
 Some text adventures recreated:
 
 - Radio Shack Haunted House
+- Maniac Mansion like text adventure
