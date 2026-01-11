@@ -12,6 +12,8 @@ func _ready():
 	test_complex_maze()
 	test_diagonal_movement()
 	test_custom_heuristic()
+	test_line_of_sight()
+	test_movement_range()
 	print("\n=== All Tests Complete ===")
 
 func create_grid(data: Array) -> Array[Array]:
@@ -193,4 +195,90 @@ func test_custom_heuristic():
 	print("Path length: ", path.cells.size())
 	print("Total weight: ", path.total_weight)
 	print("Euclidean heuristic creates more direct diagonal path")
+	print()
+
+func print_grid_with_los(grid: Array[Array], from_pos: Vector2i, visible_cells: Array[AStarGridCell]):
+	var visible_positions: Array[Vector2i] = []
+	for cell in visible_cells:
+		visible_positions.append(cell.position)
+	
+	for y in range(grid.size()):
+		var line = ""
+		for x in range(grid[y].size()):
+			var pos = Vector2i(x, y)
+			var cell = grid[y][x]
+			
+			if pos == from_pos:
+				line += "O "
+			elif pos in visible_positions:
+				line += "V "
+			elif cell.weight == -1:
+				line += "# "
+			else:
+				line += ". "
+		print(line)
+
+func test_line_of_sight():
+	print("Test 9: Line of Sight (LOS) Check")
+	var grid_data = [
+		[1, 1, 1, -1, 1, 1, 1],
+		[1, 1, 1, -1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, -1, 1, 1, 1],
+		[1, 1, 1, -1, 1, 1, 1]
+	]
+	var grid = create_grid(grid_data)
+	var pathfinder = AStarPathfinding.new(grid)
+	var from_pos = Vector2i(1, 2)
+	var visible = pathfinder.check_los(from_pos, 4.0)
+	
+	print_grid_with_los(grid, from_pos, visible)
+	print("Origin: ", from_pos)
+	print("Max distance: 4.0 cells")
+	print("Visible cells: ", visible.size())
+	print("O = Origin, V = Visible, # = Obstacle, . = Not visible")
+	print()
+
+func print_grid_with_movement(grid: Array[Array], from_pos: Vector2i, reachable_cells: Array[AStarGridCell]):
+	var reachable_positions: Array[Vector2i] = []
+	for cell in reachable_cells:
+		reachable_positions.append(cell.position)
+	
+	for y in range(grid.size()):
+		var line = ""
+		for x in range(grid[y].size()):
+			var pos = Vector2i(x, y)
+			var cell = grid[y][x]
+			
+			if pos == from_pos:
+				line += "S "
+			elif pos in reachable_positions:
+				line += "M "
+			elif cell.weight == -1:
+				line += "# "
+			else:
+				line += ". "
+		print(line)
+
+func test_movement_range():
+	print("Test 10: Movement Range Check")
+	var grid_data = [
+		[1, 1, 1, 1, 1, 1, 1],
+		[1, 2, 2, -1, 1, 1, 1],
+		[1, 2, 1, 1, 1, -1, 1],
+		[1, 1, 1, -1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1]
+	]
+	var grid = create_grid(grid_data)
+	var pathfinder = AStarPathfinding.new(grid)
+	var from_pos = Vector2i(0, 2)
+	var max_movement = 5.0
+	var reachable = pathfinder.check_movement(from_pos, max_movement)
+	
+	print_grid_with_movement(grid, from_pos, reachable)
+	print("Origin: ", from_pos)
+	print("Max movement: ", max_movement)
+	print("Reachable cells: ", reachable.size())
+	print("S = Start, M = Reachable, # = Obstacle")
+	print("Note: Higher weight cells (2) consume more movement")
 	print()

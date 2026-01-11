@@ -122,3 +122,144 @@ func reconstruct_path(came_from: Dictionary, current: Vector2i) -> AStarPathResu
 	
 	return result
 	
+
+func check_los(from_position: Vector2i, max_distance: float) -> Array[AStarGridCell]:
+	var visible_cells: Array[AStarGridCell] = []
+	
+	if not is_valid_position(from_position):
+		return visible_cells
+	
+	var max_dist_sq = max_distance * max_distance
+	
+	# Check all cells within the bounding box
+	var min_x = max(0, int(from_position.x - max_distance))
+	var max_x = min(width - 1, int(from_position.x + max_distance))
+	var min_y = max(0, int(from_position.y - max_distance))
+	var max_y = min(height - 1, int(from_position.y + max_distance))
+	
+	for y in range(min_y, max_y + 1):
+		for x in range(min_x, max_x + 1):
+			var target_pos = Vector2i(x, y)
+			
+			# Skip the starting position
+			if target_pos == from_position:
+				continue
+			
+			# Check if within max distance
+			var dx = target_pos.x - from_position.x
+			var dy = target_pos.y - from_position.y
+			var dist_sq = dx * dx + dy * dy
+			
+			if dist_sq > max_dist_sq:
+				continue
+			
+			# Perform line of sight check using Bresenham's line algorithm
+			if has_line_of_sight(from_position, target_pos):
+				var cell = get_cell(target_pos)
+				if cell:
+					visible_cells.append(cell)
+	
+	return visible_cells
+
+func has_line_of_sight(from: Vector2i, to: Vector2i) -> bool:
+	var dx = abs(to.x - from.x)
+	var dy = abs(to.y - from.y)
+	var x = from.x
+	var y = from.y
+	var step_x = 1 if to.x > from.x else -1
+	var step_y = 1 if to.y > from.y else -1
+	
+	if dx > dy:
+		var error = dx / 2.0
+		while x != to.x:
+			x += step_x
+			error -= dy
+			if error < 0:
+				y += step_y
+				error += dx
+			
+			# Check if current position is blocked
+			var current_pos = Vector2i(x, y)
+			if current_pos != to:  # Don't check the target itself
+				var cell = get_cell(current_pos)
+				if not cell or not cell.is_traversable():
+					return false
+	else:
+		var error = dy / 2.0
+		while y != to.y:
+			y += step_y
+			error -= dx
+			if error < 0:
+				x += step_x
+				error += dy
+			
+			# Check if current position is blocked
+			var current_pos = Vector2i(x, y)
+			if current_pos != to:  # Don't check the target itself
+				var cell = get_cell(current_pos)
+				if not cell or not cell.is_traversable():
+					return false
+	
+	return true
+
+func check_movement(from_position: Vector2i, max_movement: float) -> Array[AStarGridCell]:
+	var reachable_cells: Array[AStarGridCell] = []
+	
+	if not is_valid_position(from_position):
+		return reachable_cells
+	
+	var start_cell = get_cell(from_position)
+	if not start_cell or not start_cell.is_traversable():
+		return reachable_cells
+	
+	# Use Dijkstra's algorithm to find all reachable cells within movement range
+	var visited: Dictionary = {}
+	var cost_so_far: Dictionary = {from_position: 0.0}
+	var frontier: Array = [from_position]
+	
+	while frontier.size() > 0:
+		# Get the position with lowest cost
+		var current = frontier[0]
+		var lowest_cost = cost_so_far.get(current, INF)
+		var lowest_index = 0
+		
+		for i in range(1, frontier.size()):
+			var pos = frontier[i]
+			var cost = cost_so_far.get(pos, INF)
+			if cost < lowest_cost:
+				current = pos
+				lowest_cost = cost
+				lowest_index = i
+		
+		frontier.remove_at(lowest_index)
+		
+		if visited.has(current):
+			continue
+		
+		visited[current] = true
+		
+		# Add this cell to reachable cells (except starting position)
+		if current != from_position:
+			var cell = get_cell(current)
+			if cell:
+				reachable_cells.append(cell)
+		
+		# Explore neighbors
+		for neighbor_pos in get_neighbors(current):
+			if visited.has(neighbor_pos):
+				continue
+			
+			var neighbor_cell = get_cell(neighbor_pos)
+			if not neighbor_cell or not neighbor_cell.is_traversable():
+				continue
+			
+			var new_cost = cost_so_far[current] + neighbor_cell.weight
+			
+			# Only add if within movement range
+			if new_cost <= max_movement:
+				if not cost_so_far.has(neighbor_pos) or new_cost < cost_so_far[neighbor_pos]:
+					cost_so_far[neighbor_pos] = new_cost
+					if not frontier.has(neighbor_pos):
+						frontier.append(neighbor_pos)
+	
+	return reachable_cells

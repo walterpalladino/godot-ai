@@ -201,6 +201,45 @@ var pathfinder3 = AStarPathfinding.new(grid, true, euclidean)
 The diagonal movement is particularly useful for games and simulations where characters can move in all 8 directions!
 
 
+
+
+## New Methods:
+
+### 1. **check_los(from_position: Vector2i, max_distance: float) -> Array[AStarGridCell]**
+
+-   Returns all cells visible from `from_position` within `max_distance` grid cells
+-   Uses Bresenham's line algorithm for line-of-sight calculation
+-   Allows partially blocked diagonals (only checks cells along the line, not corners)
+-   Distance is measured in grid cells (not weight-based)
+-   Blocked cells obstruct vision beyond them
+
+### 2. **check_movement(from_position: Vector2i, max_movement: float) -> Array[AStarGridCell]**
+
+-   Returns all cells reachable from `from_position` with available `max_movement` points
+-   Uses Dijkstra's algorithm to explore all reachable positions
+-   Cell weights consume movement points (higher weight = more cost)
+-   Movement never exceeds `max_movement` budget
+-   Respects the `allow_diagonal` setting from initialization
+
+## Key Features:
+
+-   **check_los**: Perfect for visibility mechanics, fog of war, or targeting systems
+-   **check_movement**: Ideal for turn-based strategy games showing valid move positions
+
+## New Test Cases:
+
+-   **Test 9**: Demonstrates line of sight with obstacles blocking vision
+-   **Test 10**: Shows movement range with weighted terrain (cells with weight 2 consume more movement)
+
+Both methods work seamlessly with the existing pathfinding system and respect diagonal movement settings!
+
+
+
+
+
+
+
+
 # Pure Dijkstra pathfinding system for Grids
 
 ## Components:
