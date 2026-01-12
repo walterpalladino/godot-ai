@@ -43,3 +43,5 @@ Some text adventures recreated:
 
 - Radio Shack Haunted House
 - Maniac Mansion like text adventure
+- Interactive Novel
+- Once Upon a Dice In The West

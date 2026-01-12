@@ -13,3 +13,8 @@ config_version=5
 config/name="godot-ai"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://assets/general-ai-topics/games/interactive-novel/scripts/game_state.gd"
+ScenarioManager="*res://assets/general-ai-topics/games/interactive-novel/scripts/scenario_manager.gd"
