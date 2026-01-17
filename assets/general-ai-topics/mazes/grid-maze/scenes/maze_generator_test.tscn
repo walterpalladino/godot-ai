@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dliuiil6lr5b"]
+
+[ext_resource type="Script" uid="uid://cuvo8l0ppvgki" path="res://assets/general-ai-topics/mazes/grid-maze/scripts/maze_generator.gd" id="1_eu82r"]
+
+[node name="MazeGeneratorTest" type="Node"]
+script = ExtResource("1_eu82r")
